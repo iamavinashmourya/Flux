@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CyberPaper | Kinetic PDF Editor</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600;700&amp;family=Plus+Jakarta+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary-container": "#4a5e00",
+                        "tertiary-container": "#00ffff",
+                        "on-tertiary": "#006767",
+                        "error-dim": "#d53d18",
+                        "secondary-fixed": "#ffbdf3",
+                        "on-surface-variant": "#aba9bf",
+                        "surface": "#0c0c1d",
+                        "on-error": "#450900",
+                        "surface-tint": "#f3ffca",
+                        "surface-dim": "#0c0c1d",
+                        "inverse-surface": "#fcf8ff",
+                        "inverse-on-surface": "#545366",
+                        "surface-container-low": "#121223",
+                        "secondary-dim": "#ff51fa",
+                        "error": "#ff7351",
+                        "on-primary": "#516700",
+                        "on-background": "#e6e3fb",
+                        "on-tertiary-fixed": "#004949",
+                        "tertiary-fixed-dim": "#00efef",
+                        "primary": "#f3ffca",
+                        "secondary-container": "#a900a9",
+                        "secondary-fixed-dim": "#ffa6f3",
+                        "on-secondary-fixed": "#620061",
+                        "surface-bright": "#2a2a43",
+                        "background": "#0c0c1d",
+                        "secondary": "#ff51fa",
+                        "surface-container-lowest": "#000000",
+                        "primary-container": "#cafd00",
+                        "on-surface": "#e6e3fb",
+                        "surface-container-high": "#1d1d33",
+                        "on-primary-fixed-variant": "#526900",
+                        "on-primary-fixed": "#3a4a00",
+                        "surface-container": "#18182b",
+                        "surface-container-highest": "#24233b",
+                        "on-secondary": "#400040",
+                        "primary-fixed-dim": "#beee00",
+                        "primary-dim": "#beee00",
+                        "inverse-primary": "#516700",
+                        "error-container": "#b92902",
+                        "surface-variant": "#24233b",
+                        "primary-fixed": "#cafd00",
+                        "on-secondary-fixed-variant": "#920091",
+                        "tertiary": "#c1fffe",
+                        "tertiary-fixed": "#00ffff",
+                        "outline": "#757388",
+                        "on-secondary-container": "#fff5f9",
+                        "outline-variant": "#474659",
+                        "on-tertiary-container": "#005d5d",
+                        "tertiary-dim": "#00e6e6",
+                        "on-tertiary-fixed-variant": "#006868",
+                        "on-error-container": "#ffd2c8"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0px",
+                        "lg": "0px",
+                        "xl": "0px",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Space Grotesk"],
+                        "body": ["Inter"],
+                        "label": ["Plus Jakarta Sans"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .neo-shadow-sm { shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] }
+        .neo-shadow-md { shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] }
+        .sticker-rotate-1 { transform: rotate(-1deg); }
+        .sticker-rotate-2 { transform: rotate(2deg); }
+        .glitch-border { border: 4px solid black; }
+        ::-webkit-scrollbar { width: 12px; }
+        ::-webkit-scrollbar-track { background: #0c0c1d; }
+        ::-webkit-scrollbar-thumb { background: #cafd00; border: 3px solid #0c0c1d; }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body overflow-hidden h-screen flex flex-col">
+<!-- TopNavBar -->
+<header class="flex justify-between items-center w-full px-6 py-4 bg-[#0c0c1d] border-b-4 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] z-50">
+<div class="flex items-center gap-8">
+<div class="text-2xl font-black text-[#f3ffca] italic hover:skew-x-12 transition-transform font-headline tracking-tighter uppercase">
+                CyberPaper
+            </div>
+<nav class="hidden md:flex gap-6 items-center">
+<a class="font-headline tracking-tighter uppercase font-bold text-[#f3ffca] hover:text-[#c1fffe] transition-colors duration-100" href="#">Dashboard</a>
+<a class="font-headline tracking-tighter uppercase font-bold text-[#ff51fa] underline decoration-4 underline-offset-8" href="#">Editor</a>
+<a class="font-headline tracking-tighter uppercase font-bold text-[#f3ffca] hover:text-[#c1fffe] transition-colors duration-100" href="#">Assets</a>
+<a class="font-headline tracking-tighter uppercase font-bold text-[#f3ffca] hover:text-[#c1fffe] transition-colors duration-100" href="#">Export</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<div class="bg-surface-container-lowest border-2 border-black flex items-center px-3 py-1 neo-shadow-sm">
+<span class="material-symbols-outlined text-primary mr-2">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm font-label uppercase text-primary placeholder:text-outline" placeholder="FIND STUFF..." type="text"/>
+</div>
+<button class="material-symbols-outlined p-2 text-primary hover:bg-[#cafd00] hover:text-black transition-colors duration-100 active:translate-y-1 active:translate-x-1">notifications</button>
+<button class="material-symbols-outlined p-2 text-primary hover:bg-[#cafd00] hover:text-black transition-colors duration-100 active:translate-y-1 active:translate-x-1">settings</button>
+<div class="w-10 h-10 border-2 border-primary overflow-hidden hover:rotate-6 transition-transform">
+<img alt="User profile with neon stroke" class="w-full h-full object-cover" data-alt="Cyberpunk user profile avatar with vibrant neon accents and sharp lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBS9yL0S7xCvolWP8OFFhHVe0UEOsonS73xfUX9zDVkNWduo7wYBkDhzUFFU0DhwVwSuwhobf_HHE-NLMB09a370tuPbXBySt3I164bjBUmUgf3aYz4BPVemmrbl_ngertbgIh-EndYBE3Bq441A7FFFXAerZdREUaFC5oO8kuPzlVjs2pvjyJJcnQaP71santKJxmEKJObkIy3yeSDHT6yWp7uxkhYHB7LSDOSTeJtwVAa2qzMDfzKZNCPeayJYWNQ6NXVHf9_HxE"/>
+</div>
+</div>
+</header>
+<div class="flex flex-1 overflow-hidden">
+<!-- SideNavBar (Toolbox) -->
+<aside class="flex flex-col h-full py-8 items-center gap-6 bg-[#0c0c1d] border-r-4 border-black shadow-[8px_0px_0px_0px_rgba(0,0,0,1)] w-24 z-40">
+<div class="flex flex-col items-center mb-4">
+<span class="text-[10px] font-headline font-bold text-[#cafd00] tracking-widest">TOOLBOX</span>
+<span class="text-[8px] font-headline text-outline tracking-tighter">V1.0-KINETIC</span>
+</div>
+<nav class="flex flex-col gap-6 items-center flex-1">
+<button class="flex flex-col items-center gap-1 group">
+<div class="w-12 h-12 flex items-center justify-center text-[#f3ffca] opacity-80 hover:opacity-100 hover:bg-[#c1fffe] hover:text-black hover:scale-105 active:scale-95 transition-all">
+<span class="material-symbols-outlined">near_me</span>
+</div>
+<span class="text-[10px] font-headline font-bold text-[#f3ffca]">SELECT</span>
+</button>
+<button class="flex flex-col items-center gap-1 group">
+<div class="w-12 h-12 flex items-center justify-center text-[#f3ffca] opacity-80 hover:opacity-100 hover:bg-[#c1fffe] hover:text-black hover:scale-105 active:scale-95 transition-all">
+<span class="material-symbols-outlined">title</span>
+</div>
+<span class="text-[10px] font-headline font-bold text-[#f3ffca]">TEXT</span>
+</button>
+<button class="flex flex-col items-center gap-1 group">
+<div class="w-12 h-12 flex items-center justify-center bg-[#ff51fa] text-black -rotate-2 scale-110 border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:scale-110 active:scale-95 transition-all">
+<span class="material-symbols-outlined">gesture</span>
+</div>
+<span class="text-[10px] font-headline font-bold text-[#ff51fa]">DRAW</span>
+</button>
+<button class="flex flex-col items-center gap-1 group">
+<div class="w-12 h-12 flex items-center justify-center text-[#f3ffca] opacity-80 hover:opacity-100 hover:bg-[#c1fffe] hover:text-black hover:scale-105 active:scale-95 transition-all">
+<span class="material-symbols-outlined">theater_comedy</span>
+</div>
+<span class="text-[10px] font-headline font-bold text-[#f3ffca]">STICKER</span>
+</button>
+<button class="flex flex-col items-center gap-1 group">
+<div class="w-12 h-12 flex items-center justify-center text-[#f3ffca] opacity-80 hover:opacity-100 hover:bg-[#c1fffe] hover:text-black hover:scale-105 active:scale-95 transition-all">
+<span class="material-symbols-outlined">layers</span>
+</div>
+<span class="text-[10px] font-headline font-bold text-[#f3ffca]">LAYER</span>
+</button>
+</nav>
+<div class="flex flex-col gap-4 items-center">
+<button class="material-symbols-outlined text-[#f3ffca] hover:text-[#cafd00]">help</button>
+<button class="material-symbols-outlined text-[#f3ffca] hover:text-error">logout</button>
+<div class="w-4 h-4 bg-primary rotate-45 border-2 border-black"></div>
+</div>
+</aside>
+<!-- Main Workspace -->
+<main class="flex-1 bg-surface-container-low relative overflow-auto flex flex-col items-center p-12">
+<!-- Canvas Container -->
+<div class="relative bg-white text-black w-full max-w-4xl min-h-[1200px] shadow-[20px_20px_0px_0px_rgba(255,81,250,0.3)] border-4 border-black p-16 font-body">
+<!-- Background texture simulation -->
+<div class="absolute inset-0 opacity-5 pointer-events-none" style="background-image: radial-gradient(#000 1px, transparent 1px); background-size: 20px 20px;"></div>
+<!-- PDF Content Header -->
+<div class="mb-12 relative">
+<h1 class="text-6xl font-black font-headline tracking-tighter uppercase mb-2">Technical Architecture Brief</h1>
+<div class="h-4 bg-primary-container w-full border-2 border-black mb-4"></div>
+<p class="text-xl font-bold italic opacity-70">CONFIDENTIAL PROJECT: NEON-MIND // 2024</p>
+<!-- Graffiti Overlay -->
+<div class="absolute -top-6 -right-10 rotate-12 bg-secondary text-on-secondary px-4 py-2 border-2 border-black font-headline font-bold neo-shadow-sm">
+                        REJECTED??
+                    </div>
+</div>
+<!-- PDF Content Body -->
+<div class="space-y-8 relative">
+<section>
+<h2 class="text-2xl font-black font-headline uppercase border-b-2 border-black inline-block mb-4">01. Core Infrastructure</h2>
+<p class="text-lg leading-relaxed">
+                            The proposed system utilizes a <span class="bg-primary-container px-1 border border-black font-bold">decentralized neural mesh</span> architecture to facilitate real-time data streaming across low-latency nodes. Each node is isolated via a proprietary <span class="text-secondary font-black underline decoration-4">Quantum Tunneling Protocol</span>.
+                        </p>
+</section>
+<div class="grid grid-cols-2 gap-8 my-12">
+<div class="border-4 border-black p-6 relative bg-surface-container-lowest text-primary">
+<h3 class="font-headline font-bold text-xl mb-2">NODE TOPOLOGY</h3>
+<div class="h-32 bg-surface-container-high border-2 border-black flex items-center justify-center">
+<!-- Mock Diagram -->
+<div class="flex gap-4">
+<div class="w-8 h-8 bg-secondary border-2 border-black rotate-12"></div>
+<div class="w-8 h-8 bg-primary border-2 border-black -rotate-6"></div>
+<div class="w-8 h-8 bg-tertiary border-2 border-black rotate-45"></div>
+</div>
+</div>
+<span class="absolute -bottom-4 -right-4 material-symbols-outlined text-4xl text-secondary" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<div class="border-4 border-black p-6 bg-[#ffff00] text-black">
+<h3 class="font-headline font-bold text-xl mb-2">RISK ASSESSMENT</h3>
+<ul class="font-bold text-sm space-y-2">
+<li>- LATENCY SPIKES (HIGH)</li>
+<li>- BUFFER OVERFLOWS (MED)</li>
+<li>- BIT-ROT (LOW)</li>
+</ul>
+</div>
+</div>
+<section class="relative">
+<h2 class="text-2xl font-black font-headline uppercase border-b-2 border-black inline-block mb-4">02. Data Persistence</h2>
+<p class="text-lg leading-relaxed">
+                            Storage modules are hot-swappable and utilize <span class="italic">Cryo-State</span> memory buffers. All transactions are logged in a distributed ledger with sub-millisecond finality. 
+                            <span class="relative inline-block px-2 py-1 bg-tertiary text-on-tertiary font-bold -skew-x-12 ml-2">URGENT: UPDATE CACHE LOGIC</span>
+</p>
+<!-- Chunky Annotation -->
+<div class="absolute -left-20 top-0 w-32 border-l-4 border-t-4 border-black p-2 font-headline font-bold text-secondary -rotate-12">
+                            CHECK THIS PART!
+                        </div>
+</section>
+<!-- Sticker decorations -->
+<div class="absolute bottom-20 right-0 w-24 h-24 rotate-12">
+<div class="w-full h-full bg-[#ff51fa] border-4 border-black flex items-center justify-center text-black font-black text-2xl">
+                            VIBE
+                        </div>
+</div>
+<div class="absolute top-1/2 left-1/3 opacity-20 pointer-events-none">
+<span class="material-symbols-outlined text-[200px] text-primary">gesture</span>
+</div>
+</div>
+<!-- Sticker Overlay -->
+<div class="absolute top-10 right-10 flex flex-col gap-4">
+<div class="bg-primary text-black p-3 border-2 border-black neo-shadow-sm font-bold -rotate-6">PRO APPROVED</div>
+<div class="bg-secondary text-white p-2 border-2 border-black neo-shadow-sm text-center font-black rotate-3">LOUD!</div>
+</div>
+</div>
+<!-- Floating Toolbar -->
+<div class="fixed bottom-10 left-1/2 -translate-x-1/2 flex items-center gap-2 p-2 bg-[#0c0c1d]/80 backdrop-blur-xl border-4 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] z-50">
+<button class="w-12 h-12 flex items-center justify-center hover:bg-primary hover:text-black transition-colors">
+<span class="material-symbols-outlined">zoom_in</span>
+</button>
+<div class="w-1 h-8 bg-outline-variant mx-1"></div>
+<button class="w-12 h-12 flex items-center justify-center bg-primary text-black border-2 border-black neo-shadow-sm">
+<span class="material-symbols-outlined">edit</span>
+</button>
+<button class="w-12 h-12 flex items-center justify-center hover:bg-secondary hover:text-black transition-colors">
+<span class="material-symbols-outlined">brush</span>
+</button>
+<button class="w-12 h-12 flex items-center justify-center hover:bg-tertiary hover:text-black transition-colors">
+<span class="material-symbols-outlined">add_reaction</span>
+</button>
+<div class="w-1 h-8 bg-outline-variant mx-1"></div>
+<button class="w-12 h-12 flex items-center justify-center hover:bg-white hover:text-black transition-colors">
+<span class="material-symbols-outlined">undo</span>
+</button>
+<button class="bg-primary-container text-black px-6 py-2 font-headline font-black border-2 border-black neo-shadow-sm ml-4 active:translate-y-1 active:translate-x-1 transition-all">
+                    SAVE CHANGES
+                </button>
+</div>
+</main>
+<!-- Right Side Panel (Inspector) -->
+<aside class="w-80 bg-surface-container border-l-4 border-black h-full flex flex-col z-40">
+<div class="p-6 border-b-4 border-black bg-surface-bright flex justify-between items-center">
+<h2 class="font-headline font-black text-xl tracking-tighter uppercase italic">Vibe Check</h2>
+<span class="material-symbols-outlined text-secondary">analytics</span>
+</div>
+<div class="flex-1 overflow-y-auto p-6 space-y-8">
+<!-- Vibe Score Section -->
+<div>
+<h3 class="text-[10px] font-headline font-bold text-outline tracking-widest uppercase mb-4">DOC PROPERTIES</h3>
+<div class="bg-surface-container-highest border-2 border-black p-4 space-y-4">
+<div class="flex justify-between items-center">
+<span class="font-label font-bold text-sm">LEGIBILITY</span>
+<span class="font-headline font-black text-primary">84%</span>
+</div>
+<div class="h-2 w-full bg-surface-container-low border border-black">
+<div class="h-full bg-primary" style="width: 84%;"></div>
+</div>
+<div class="flex justify-between items-center">
+<span class="font-label font-bold text-sm">VIBE ENERGY</span>
+<span class="font-headline font-black text-secondary">OVERLOAD</span>
+</div>
+</div>
+</div>
+<!-- Layers Deck -->
+<div>
+<h3 class="text-[10px] font-headline font-bold text-outline tracking-widest uppercase mb-4">LAYERS DECK</h3>
+<div class="space-y-[-20px]">
+<!-- Layer Card 1 -->
+<div class="bg-surface-bright border-2 border-black p-3 flex items-center justify-between hover:translate-x-2 transition-transform cursor-pointer relative z-30 sticker-rotate-1 neo-shadow-sm">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">sticker</span>
+<span class="font-headline font-bold text-xs">APPROVED_STAMP.PNG</span>
+</div>
+<span class="material-symbols-outlined text-xs">visibility</span>
+</div>
+<!-- Layer Card 2 -->
+<div class="bg-surface-container-high border-2 border-black p-3 flex items-center justify-between hover:translate-x-2 transition-transform cursor-pointer relative z-20 -rotate-1 neo-shadow-sm">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary">gesture</span>
+<span class="font-headline font-bold text-xs">ANNOTATION_RED_LINE</span>
+</div>
+<span class="material-symbols-outlined text-xs">visibility</span>
+</div>
+<!-- Layer Card 3 -->
+<div class="bg-surface-container-low border-2 border-black p-3 flex items-center justify-between hover:translate-x-2 transition-transform cursor-pointer relative z-10 rotate-1 neo-shadow-sm">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-tertiary">description</span>
+<span class="font-headline font-bold text-xs">BASE_DOCUMENT_PDF</span>
+</div>
+<span class="material-symbols-outlined text-xs">visibility</span>
+</div>
+</div>
+</div>
+<!-- Quick Tweaks -->
+<div>
+<h3 class="text-[10px] font-headline font-bold text-outline tracking-widest uppercase mb-4">STYLE TWEAKS</h3>
+<div class="grid grid-cols-2 gap-3">
+<button class="bg-secondary text-on-secondary p-4 border-2 border-black font-headline font-black text-xs neo-shadow-sm hover:scale-105 transition-transform">GLITCH IT</button>
+<button class="bg-primary text-on-primary p-4 border-2 border-black font-headline font-black text-xs neo-shadow-sm hover:scale-105 transition-transform">NEON FILL</button>
+<button class="bg-tertiary text-on-tertiary p-4 border-2 border-black font-headline font-black text-xs neo-shadow-sm hover:scale-105 transition-transform">X-RAY</button>
+<button class="bg-surface-bright text-primary p-4 border-2 border-black font-headline font-black text-xs neo-shadow-sm hover:scale-105 transition-transform">INVERT</button>
+</div>
+</div>
+</div>
+<!-- Panel Footer -->
+<div class="p-6 border-t-4 border-black bg-surface-container-lowest">
+<button class="w-full bg-white text-black font-headline font-black py-3 border-2 border-black neo-shadow-sm flex items-center justify-center gap-2 hover:bg-primary-container transition-colors">
+<span class="material-symbols-outlined">rocket_launch</span>
+                    UPGRADE TO PRO
+                </button>
+</div>
+</aside>
+</div>
+<!-- Background Grid Effect Overlay -->
+<div class="fixed inset-0 pointer-events-none opacity-[0.03] z-[-1]" style="background-image: linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px); background-size: 100px 100px;"></div>
+</body></html>
